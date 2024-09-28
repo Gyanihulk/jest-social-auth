@@ -24,7 +24,7 @@ const SignInPage: React.FC = () => {
 
   return (
     <div>
-      <p className="text-3xl font-black">Sign in to your account</p>
+      <p className="text-3xl font-black">Sign In</p>
       <div className="mt-10">
         <Input
           label="Email" 

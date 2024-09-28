@@ -6,7 +6,7 @@ const Navbar: React.FC = () => {
     <nav className="py-4 px-12 flex border-b border-gray-300">
       <div className="m-1">
         <p className="text-2xl tracking-tight font-semibold px-4">
-          WebReinvent Assignment
+          Assignment
         </p>
       </div>
       <div className="ml-auto flex space-x-10">
