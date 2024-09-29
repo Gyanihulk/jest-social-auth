@@ -1,25 +1,36 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import NavLink from "./Navlink";
+import { useSelector } from "react-redux";
+import { RootState } from "../stores/userStore";
+import { useLocation } from "react-router-dom";
+import LogoutButton from "./LogoutButton";
 
 const Navbar: React.FC = () => {
+  const isAuhenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+
   return (
     <nav className="py-4 px-12 flex border-b border-gray-300">
       <div className="m-1">
         <p className="text-2xl tracking-tight font-semibold px-4">
-          WebReinvent Assignment
+          Secure pages
         </p>
       </div>
       <div className="ml-auto flex space-x-10">
-        <Link to="/signin">
-          <p className="text-base leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2">
-            Login
-          </p>
-        </Link>
-        <Link to="/dashboard">
-          <p className="text-base leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2">
-            Dashboard
-          </p>
-        </Link>
+        {isAuhenticated ? (
+          <>
+            <NavLink to="/dashboard" text="Dashboard" />
+            <NavLink to="/profile" text="My profile" />
+            <LogoutButton/>
+          </>
+        ) : (
+          <>
+            {" "}
+            <NavLink to="/signin" text="Sign In" />
+            <NavLink to="/signup" text="Sign Up" />
+          </>
+        )}
       </div>
     </nav>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { register } from "../services/http";
+import { getUserById, register } from "../services/http";
 import Input from "../components/Input";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
@@ -10,11 +10,14 @@ const SignUpPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const handleSubmit = async () => {
     try {
-      const response=await register(email, password);
-      dispatch(signup(response.data))
+      const response = await register(email, password);
+      const userInfo = await getUserById(response.data.id);
+      dispatch(
+        signup({ user: userInfo.data.data, token: response.data.token })
+      );
       navigate("/dashboard");
     } catch (error) {
       console.error("Registration failed", error);
