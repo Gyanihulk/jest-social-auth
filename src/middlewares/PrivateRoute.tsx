@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, RouteProps } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { RootState } from '../stores/userStore';
+import { RouteProps } from '../types/middleware';
 
 const PrivateRoute = ({ children }: RouteProps) => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);

@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { signup } from "../stores/slices/authSlice";
 import { useDispatch } from "react-redux";
+import AuthLayout from "./layout/AuthLayout";
 
 const SignUpPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -25,7 +26,7 @@ const SignUpPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <AuthLayout>
       <p className="text-3xl font-black">Sign up for an account</p>
       <div className="mt-10">
         <Input
@@ -55,7 +56,7 @@ const SignUpPage: React.FC = () => {
           <span className="cursor-pointer text-pink-600"> Sign In.</span>
         </Link>
       </p>
-    </div>
+    </AuthLayout>
   );
 };
 

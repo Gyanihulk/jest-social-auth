@@ -1,3 +1,5 @@
+import { User } from "./stores";
+
 export interface ButtonProps {
   text: string;
   onClick: () => void;
@@ -15,4 +17,15 @@ export interface InputProps
 export interface NavLinkProps {
   to: string;
   text: string;
+}
+
+
+export interface CardProps {
+  img: string;
+  title: string;
+  desc: string;
+}
+
+export interface UserCardsListProps {
+  users: User[];
 }
