@@ -6,7 +6,7 @@ export const authenticatedMockStore = {
   getState: () => ({
     auth: {
       isAuthenticated: true,
-      user: { id: 1, name: 'John Doe' }, 
+      user: { id: 1, first_name: 'John' , last_name: ' Doe', avatar: 'image', email: 'JohnDoe@gyani.com'}, 
     },
   }),
 };

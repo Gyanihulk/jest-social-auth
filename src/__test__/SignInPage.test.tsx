@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import renderWithProviders from "../lib/renderWithProviders";
 import App from "../App"; // Assuming App contains routing logic
 import { login as apiLogin, getUsers } from "../services/http"; // Import getUsers
+import { GetUsersResponse, LoginResponse } from "../types/api";
 
 // Mock the login and getUsers services
 vi.mock("../services/http", () => ({
@@ -14,7 +15,7 @@ vi.mock("../services/http", () => ({
 describe("SignInPage", () => {
   it("allows the user to login with email and password", async () => {
     // Mock the API login response
-    const mockLoginResponse = {
+    const mockLoginResponse :LoginResponse= {
       data: {
         token: "fake_token",
         user: { id: 1, name: "Eve Holt" },
@@ -22,7 +23,7 @@ describe("SignInPage", () => {
     };
 
     // Mock the getUsers API response
-    const mockUsersResponse = {
+    const mockUsersResponse :GetUsersResponse= {
       data: {
         data: [
           { id: 1, name: "John Doe" },
@@ -32,8 +33,8 @@ describe("SignInPage", () => {
     };
 
     // Mock the API calls
-    (apiLogin as any).mockResolvedValue(mockLoginResponse);
-    (getUsers as any).mockResolvedValue(mockUsersResponse); // Mocking getUsers
+    (apiLogin as jest.MockedFunction<typeof apiLogin>).mockResolvedValue(mockLoginResponse);
+    (getUsers as jest.MockedFunction<typeof getUsers>).mockResolvedValue(mockUsersResponse);
 
     // Render the App with the initial route set to "/signin"
     renderWithProviders(<App />, ["/signin"]);
@@ -52,8 +53,9 @@ describe("SignInPage", () => {
 
     // Verify that the API login function is called with the correct email and password
     expect(apiLogin).toHaveBeenCalledWith("eve.holt@reqres.in", "cityslicka");
-
     // After the login request, ensure the dashboard navigation happens
+    expect(screen.queryByText(/Secure Dashboard/i)).toBeInTheDocument(); 
+
     expect(screen.queryByText(/sign in/i)).not.toBeInTheDocument(); // Should be redirected to Dashboard
   });
 });

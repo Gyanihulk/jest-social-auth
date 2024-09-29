@@ -1,9 +1,7 @@
 import React from 'react';
+import { InputProps } from '../types/components';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  name: string; // Assuming every input has a name
-}
+
 
 const Input: React.FC<InputProps> = ({ label, name, className = '', ...props }) => {
   return (
