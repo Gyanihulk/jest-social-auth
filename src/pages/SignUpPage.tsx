@@ -1,25 +1,38 @@
 import React, { useState } from "react";
-import { register } from "../services/http";
+import { getUserById, register } from "../services/http";
 import Input from "../components/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import { signup } from "../stores/slices/authSlice";
+import { useDispatch } from "react-redux";
+import AuthLayout from "./layout/AuthLayout";
 
 const SignUpPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSubmit = async () => {
     try {
-      await register(email, password);
-      // Redirect to login or dashboard after registration
+      const response = await register(email, password);
+      const userInfo = await getUserById(response.data.id);
+      dispatch(
+        signup({
+          user: userInfo.data.data,
+          token: response.data.token,
+        })
+      );
+      navigate("/dashboard");
     } catch (error) {
       console.error("Registration failed", error);
     }
   };
 
   return (
-    <div>
-      <p className="text-3xl font-black">Sign up for an account</p>
+    <AuthLayout>
+      <p className="text-3xl font-black">
+        Sign up for an account
+      </p>
       <div className="mt-10">
         <Input
           label="Email"
@@ -45,10 +58,13 @@ const SignUpPage: React.FC = () => {
       <p className="mt-12 text-sm font-light">
         Already have an account?
         <Link to="/signin">
-          <span className="cursor-pointer text-pink-600"> Sign In.</span>
+          <span className="cursor-pointer text-pink-600">
+            {" "}
+            Sign In.
+          </span>
         </Link>
       </p>
-    </div>
+    </AuthLayout>
   );
 };
 

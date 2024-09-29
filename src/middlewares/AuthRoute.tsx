@@ -4,16 +4,16 @@ import { Navigate } from "react-router-dom";
 import { RootState } from "../stores/userStore";
 import { RouteProps } from "../types/middleware";
 
-const PrivateRoute = ({ children }: RouteProps) => {
+const AuthRoute = ({ children }: RouteProps) => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
 
   return isAuthenticated ? (
-    children
+    <Navigate to="/dashboard" />
   ) : (
-    <Navigate to="/signin" />
+    <>{children}</>
   );
 };
 
-export default PrivateRoute;
+export default AuthRoute;

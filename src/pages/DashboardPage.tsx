@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { getUsers } from '../services/http';
+import React, { useEffect, useState } from "react";
+import { getUsers } from "../services/http";
+import UserCardsList from "../components/UserCardsList";
 
 const DashboardPage: React.FC = () => {
   const [users, setUsers] = useState([]);
@@ -14,12 +15,9 @@ const DashboardPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Dashboard</h1>
-      <ul>
-        {users.map((user: any) => (
-          <li key={user.id}>{user.first_name} {user.last_name}</li>
-        ))}
-      </ul>
+      <h1 className="text-center">Secure Dashboard</h1>
+      <h4 className="text-center">User Cards</h4>
+      <UserCardsList users={users} />
     </div>
   );
 };

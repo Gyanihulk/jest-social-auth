@@ -1,15 +1,19 @@
-import React from 'react';
+import React from "react";
+import { InputProps } from "../types/components";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  name: string; // Assuming every input has a name
-}
-
-const Input: React.FC<InputProps> = ({ label, name, className = '', ...props }) => {
+const Input: React.FC<InputProps> = ({
+  label,
+  name,
+  className = "",
+  ...props
+}) => {
   return (
     <div className="mb-4">
       {label && (
-        <label htmlFor={name} className="text-sm block mb-1">
+        <label
+          htmlFor={name}
+          className="text-sm block mb-1"
+        >
           {label}
         </label>
       )}
