@@ -5,6 +5,7 @@ import renderWithProviders from "../lib/renderWithProviders";
 import App from "../App"; // Assuming App contains routing logic
 import { login as apiLogin, getUsers } from "../services/http"; // Import getUsers
 import { GetUsersResponse, LoginResponse } from "../types/api";
+import { AxiosResponse } from "axios";
 
 // Mock the login and getUsers services
 vi.mock("../services/http", () => ({
@@ -33,8 +34,8 @@ describe("SignInPage", () => {
     };
 
     // Mock the API calls
-    (apiLogin as jest.MockedFunction<typeof apiLogin>).mockResolvedValue(mockLoginResponse);
-    (getUsers as jest.MockedFunction<typeof getUsers>).mockResolvedValue(mockUsersResponse);
+    (apiLogin as jest.MockedFunction<typeof apiLogin>).mockResolvedValue(mockLoginResponse as AxiosResponse);
+    (getUsers as jest.MockedFunction<typeof getUsers>).mockResolvedValue(mockUsersResponse as AxiosResponse );
 
     // Render the App with the initial route set to "/signin"
     renderWithProviders(<App />, ["/signin"]);
