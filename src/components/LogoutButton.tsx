@@ -13,7 +13,7 @@ const LogoutButton: React.FC = () => {
     navigate("/signin"); // Navigate back to sign-in page after logout
   };
 
-  return <Button text="Logout" onClick={handleLogout} className="bg-red-600" />;
+  return <Button text="Logout" size="medium" variant="outline" onClick={handleLogout} />;
 };
 
 export default LogoutButton;
