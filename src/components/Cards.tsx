@@ -4,7 +4,7 @@ import { CardProps } from "../types/components";
 
 const Card: React.FC<CardProps> = ({
   img,
-  title,
+  title = "",
   desc,
 }) => {
   return (

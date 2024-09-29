@@ -16,14 +16,7 @@ export interface LoginResponse {
 export interface RegisterResponse {
   data: {
     token: string;
-    user: {
-      id: number;
-      name: string;
-      email?: string;
-      first_name?: string;
-      last_name?: string;
-      avatar?: string;
-    };
+    id: number;
   };
 }
 
@@ -32,8 +25,10 @@ export interface GetUsersResponse {
   data: {
     data: Array<{
       id: number;
-      name: string;
+      first_name?: string;
+      last_name?: string;
       email?: string;
+      avatar?: string;
     }>;
   };
 }

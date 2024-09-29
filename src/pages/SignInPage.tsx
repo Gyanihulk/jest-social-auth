@@ -42,7 +42,9 @@ const SignInPage: React.FC = () => {
 
   return (
     <AuthLayout>
-      <p className="text-3xl font-black">Sign In</p>
+      <p className="text-3xl font-black">
+        Sign In Your Account
+      </p>
       <div className="mt-10">
         <Input
           label="Email"

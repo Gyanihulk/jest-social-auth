@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { screen } from "@testing-library/react";
 import App from "../App";
 import renderWithProviders from "../lib/renderWithProviders";
@@ -49,29 +49,29 @@ describe("App", () => {
 });
 
 describe("App Navigation", () => {
-  it("navigates to /signin when Login is clicked", async () => {
+  it("navigates to /signin when Sign In is clicked", async () => {
     renderWithProviders(<App />);
 
     // Simulate user clicking on the "Login" link
-    const loginLink = screen.getByText(/login/i);
+    const loginLink = screen.getByText(/sign in/i);
     await userEvent.click(loginLink);
 
     // After clicking, expect to see the SignInPage rendered
     expect(
-      screen.getByText(/Sign In/i)
+      screen.getByText(/Sign In Your Account/i)
     ).toBeInTheDocument();
   });
 
-  it("navigates to /dashboard when Dashboard is clicked", async () => {
+  it("navigates to /signup when Sign Up is clicked", async () => {
     renderWithProviders(<App />);
 
     // Simulate user clicking on the "Dashboard" link
-    const dashboardLink = screen.getByText(/dashboard/i);
+    const dashboardLink = screen.getByText(/Sign Up/i);
     await userEvent.click(dashboardLink);
 
-    // After clicking, expect to see the DashboardPage rendered
+    // After clicking, expect to see the Sign Up rendered
     expect(
-      screen.getByText(/Dashboard/i)
+      screen.getByText(/Sign up for an account/i)
     ).toBeInTheDocument();
   });
 });

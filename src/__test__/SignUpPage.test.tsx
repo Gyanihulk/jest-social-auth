@@ -8,51 +8,102 @@ import {
   getUsers,
 } from "../services/http";
 import {
-  GetUsersResponse,
   RegisterResponse,
+  GetUsersResponse,
 } from "../types/api";
 import { AxiosResponse } from "axios";
+import { MockIntersectionObserverCallback } from "../types/testCases";
 
-// Mock the register and getUsers services
+vi.stubGlobal(
+  "IntersectionObserver",
+  class MockIntersectionObserver {
+    private callback: MockIntersectionObserverCallback;
+    private elements: Element[] = [];
+
+    constructor(
+      callback: MockIntersectionObserverCallback
+    ) {
+      this.callback = callback;
+    }
+
+    observe(element: Element): void {
+      this.elements.push(element);
+      // Optionally trigger the callback with mock data
+      this.callback(
+        [{ isIntersecting: true, target: element }],
+        this as unknown as IntersectionObserver
+      );
+    }
+
+    unobserve(element: Element): void {
+      this.elements = this.elements.filter(
+        (el) => el !== element
+      );
+    }
+
+    disconnect(): void {
+      this.elements = [];
+    }
+  }
+);
 vi.mock("../services/http", () => ({
-  register: vi.fn(),
-  getUsers: vi.fn(), // Mock getUsers
+  register: vi.fn(() =>
+    Promise.resolve({
+      data: {
+        token: "fake_token",
+        id: 1,
+      },
+    })
+  ),
+  getUsers: vi.fn(),
+  verifyToken: vi.fn(),
+  getUserById: vi.fn(() =>
+    Promise.resolve({
+      data: {
+        data: {
+          id: 1,
+          email: "user@example.com",
+          first_name: "First",
+          last_name: "Last",
+        },
+      },
+    })
+  ),
 }));
 
-describe("SignInPage", () => {
+describe("SignUpPage", () => {
   it("allows the user to Register with email and password", async () => {
-    // Mock the API register response
     const mockRegisterResponse: RegisterResponse = {
       data: {
         token: "fake_token",
-        user: { id: 1, name: "Eve Holt" },
+        id: 1,
       },
     };
 
-    // Mock the getUsers API response
     const mockUsersResponse: GetUsersResponse = {
       data: {
         data: [
-          { id: 1, name: "John Doe" },
-          { id: 2, name: "Jane Doe" },
+          {
+            id: 7,
+            email: "michael.lawson@reqres.in",
+            first_name: "Michael",
+            last_name: "Lawson",
+            avatar:
+              "https://reqres.in/img/faces/7-image.jpg",
+          },
         ],
       },
     };
 
-    // Mock the API calls
-    (
-      apiRegister as jest.MockedFunction<typeof apiRegister>
-    ).mockResolvedValue(
+    vi.mocked(apiRegister).mockResolvedValue(
       mockRegisterResponse as AxiosResponse
     );
-    (
-      getUsers as jest.MockedFunction<typeof getUsers>
-    ).mockResolvedValue(mockUsersResponse as AxiosResponse);
+    vi.mocked(getUsers).mockResolvedValue(
+      mockUsersResponse as AxiosResponse
+    );
 
-    // Render the App with the initial route set to "/signin"
     renderWithProviders(<App />, ["/signup"]);
 
-    // Find the input fields
     const emailInput = screen.getByLabelText(/email/i);
     const passwordInput =
       screen.getByLabelText(/password/i);
@@ -60,25 +111,19 @@ describe("SignInPage", () => {
       name: /register/i,
     });
 
-    // Simulate user typing in the email and password
     await userEvent.type(emailInput, "eve.holt@reqres.in");
     await userEvent.type(passwordInput, "cityslicka");
-
-    // Click the login button
     await userEvent.click(registerButton);
 
-    // Verify that the API login function is called with the correct email and password
     expect(apiRegister).toHaveBeenCalledWith(
       "eve.holt@reqres.in",
       "cityslicka"
     );
-    // After the login request, ensure the dashboard navigation happens
-    expect(
-      screen.queryByText(/Secure Dashboard/i)
-    ).toBeInTheDocument();
+
+    await screen.findByText(/Secure Dashboard/i);
 
     expect(
       screen.queryByText(/sign up/i)
-    ).not.toBeInTheDocument(); // Should be redirected to Dashboard
+    ).not.toBeInTheDocument();
   });
 });
