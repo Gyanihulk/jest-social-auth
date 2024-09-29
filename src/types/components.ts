@@ -4,8 +4,8 @@ export interface ButtonProps {
   text: string;
   onClick: () => void;
   className?: string;
-  variant?: 'primary' | 'secondary' | 'outline';
-  size?: 'small' | 'large'|'medium';
+  variant?: "primary" | "secondary" | "outline";
+  size?: "small" | "large" | "medium";
 }
 
 export interface InputProps
@@ -18,7 +18,6 @@ export interface NavLinkProps {
   to: string;
   text: string;
 }
-
 
 export interface CardProps {
   img: string;

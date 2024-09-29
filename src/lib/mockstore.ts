@@ -6,7 +6,13 @@ export const authenticatedMockStore = {
   getState: () => ({
     auth: {
       isAuthenticated: true,
-      user: { id: 1, first_name: 'John' , last_name: ' Doe', avatar: 'image', email: 'JohnDoe@gyani.com'}, 
+      user: {
+        id: 1,
+        first_name: "John",
+        last_name: " Doe",
+        avatar: "image",
+        email: "JohnDoe@gyani.com",
+      },
     },
   }),
 };
@@ -17,7 +23,7 @@ export const nonAuthenticatedMockStore = {
   getState: () => ({
     auth: {
       isAuthenticated: false,
-      user: null, 
+      user: null,
     },
   }),
 };

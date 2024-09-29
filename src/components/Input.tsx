@@ -1,13 +1,19 @@
-import React from 'react';
-import { InputProps } from '../types/components';
+import React from "react";
+import { InputProps } from "../types/components";
 
-
-
-const Input: React.FC<InputProps> = ({ label, name, className = '', ...props }) => {
+const Input: React.FC<InputProps> = ({
+  label,
+  name,
+  className = "",
+  ...props
+}) => {
   return (
     <div className="mb-4">
       {label && (
-        <label htmlFor={name} className="text-sm block mb-1">
+        <label
+          htmlFor={name}
+          className="text-sm block mb-1"
+        >
           {label}
         </label>
       )}

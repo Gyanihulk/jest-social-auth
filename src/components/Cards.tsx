@@ -2,7 +2,11 @@ import React from "react";
 import { Slide, Fade } from "react-awesome-reveal";
 import { CardProps } from "../types/components";
 
-const Card: React.FC<CardProps> = ({ img, title, desc }) => {
+const Card: React.FC<CardProps> = ({
+  img,
+  title,
+  desc,
+}) => {
   return (
     <div className="text-white shadow-md rounded-lg overflow-hidden relative group">
       <img

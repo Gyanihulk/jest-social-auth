@@ -9,7 +9,11 @@ const AuthRoute = ({ children }: RouteProps) => {
     (state: RootState) => state.auth.isAuthenticated
   );
 
-  return isAuthenticated ? <Navigate to="/dashboard" /> : <>{children}</>;
+  return isAuthenticated ? (
+    <Navigate to="/dashboard" />
+  ) : (
+    <>{children}</>
+  );
 };
 
 export default AuthRoute;

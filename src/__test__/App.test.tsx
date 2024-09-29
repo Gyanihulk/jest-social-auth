@@ -12,12 +12,16 @@ describe("App", () => {
     renderWithProviders(<App />, ["/signin"]);
 
     // Expect the SignInPage to be rendered
-    expect(screen.getByText(/Sign In/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Sign In/i)
+    ).toBeInTheDocument();
   });
 
   it("renders SignUpPage at /signup route", () => {
     renderWithProviders(<App />, ["/signup"]);
-    expect(screen.getByText(/Sign Up/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Sign Up/i)
+    ).toBeInTheDocument();
   });
 
   it("renders DashboardPage at /dashboard route when authenticated", () => {
@@ -38,7 +42,9 @@ describe("App", () => {
     });
 
     // Expect the SignInPage to be rendered instead of DashboardPage
-    expect(screen.getByText(/Sign In/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Sign In/i)
+    ).toBeInTheDocument();
   });
 });
 
@@ -51,7 +57,9 @@ describe("App Navigation", () => {
     await userEvent.click(loginLink);
 
     // After clicking, expect to see the SignInPage rendered
-    expect(screen.getByText(/Sign In/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Sign In/i)
+    ).toBeInTheDocument();
   });
 
   it("navigates to /dashboard when Dashboard is clicked", async () => {
@@ -62,6 +70,8 @@ describe("App Navigation", () => {
     await userEvent.click(dashboardLink);
 
     // After clicking, expect to see the DashboardPage rendered
-    expect(screen.getByText(/Dashboard/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Dashboard/i)
+    ).toBeInTheDocument();
   });
 });

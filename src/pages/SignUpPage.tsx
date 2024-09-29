@@ -17,7 +17,10 @@ const SignUpPage: React.FC = () => {
       const response = await register(email, password);
       const userInfo = await getUserById(response.data.id);
       dispatch(
-        signup({ user: userInfo.data.data, token: response.data.token })
+        signup({
+          user: userInfo.data.data,
+          token: response.data.token,
+        })
       );
       navigate("/dashboard");
     } catch (error) {
@@ -27,7 +30,9 @@ const SignUpPage: React.FC = () => {
 
   return (
     <AuthLayout>
-      <p className="text-3xl font-black">Sign up for an account</p>
+      <p className="text-3xl font-black">
+        Sign up for an account
+      </p>
       <div className="mt-10">
         <Input
           label="Email"
@@ -53,7 +58,10 @@ const SignUpPage: React.FC = () => {
       <p className="mt-12 text-sm font-light">
         Already have an account?
         <Link to="/signin">
-          <span className="cursor-pointer text-pink-600"> Sign In.</span>
+          <span className="cursor-pointer text-pink-600">
+            {" "}
+            Sign In.
+          </span>
         </Link>
       </p>
     </AuthLayout>

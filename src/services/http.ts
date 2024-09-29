@@ -12,7 +12,10 @@ export const login = (email: string, password: string) => {
   return apiClient.post("/login", { email, password });
 };
 
-export const register = (email: string, password: string) => {
+export const register = (
+  email: string,
+  password: string
+) => {
   return apiClient.post("/register", { email, password });
 };
 

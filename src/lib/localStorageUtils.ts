@@ -1,5 +1,8 @@
 // Utility to set data in localStorage
-export const setLocalStorage = (key: string, value: any) => {
+export const setLocalStorage = (
+  key: string,
+  value: any
+) => {
   try {
     const jsonData = JSON.stringify(value); // Convert to JSON string
     localStorage.setItem(key, jsonData);
@@ -14,7 +17,10 @@ export const getLocalStorage = (key: string) => {
     const jsonData = localStorage.getItem(key);
     return jsonData ? JSON.parse(jsonData) : null; // Parse JSON if exists
   } catch (error) {
-    console.error("Error getting data from localStorage", error);
+    console.error(
+      "Error getting data from localStorage",
+      error
+    );
     return null;
   }
 };
@@ -24,7 +30,10 @@ export const removeLocalStorage = (key: string) => {
   try {
     localStorage.removeItem(key);
   } catch (error) {
-    console.error("Error removing from localStorage", error);
+    console.error(
+      "Error removing from localStorage",
+      error
+    );
   }
 };
 

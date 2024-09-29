@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
           <>
             <NavLink to="/dashboard" text="Dashboard" />
             <NavLink to="/profile" text="My profile" />
-            <LogoutButton/>
+            <LogoutButton />
           </>
         ) : (
           <>

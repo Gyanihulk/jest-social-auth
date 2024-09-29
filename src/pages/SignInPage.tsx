@@ -28,7 +28,8 @@ const SignInPage: React.FC = () => {
             email,
             first_name: firstName,
             last_name: lastName,
-            avatar: "https://reqres.in/img/faces/2-image.jpg",
+            avatar:
+              "https://reqres.in/img/faces/2-image.jpg",
           },
           token: response.data.token,
         })
@@ -40,42 +41,43 @@ const SignInPage: React.FC = () => {
   };
 
   return (
-   
-      <AuthLayout>
-        <p className="text-3xl font-black">Sign In</p>
-        <div className="mt-10">
-          <Input
-            label="Email"
-            name="email"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            className="mt-2"
-          />
-        </div>
-        <div className="mt-7">
-          <Input
-            label="Password"
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            name="password"
-          />
-        </div>
-        <Button
-          text="Login"
-          onClick={handleSubmit}
-          className="text-white w-full mt-6 bg-pink-600 p-3 rounded"
+    <AuthLayout>
+      <p className="text-3xl font-black">Sign In</p>
+      <div className="mt-10">
+        <Input
+          label="Email"
+          name="email"
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          className="mt-2"
         />
-        <p className="mt-12 text-sm font-light">
-          Don't have an account?
-          <Link to="/signup">
-            <span role="button" className="cursor-pointer text-pink-600">
-              {" "}
-              Sign Up.
-            </span>
-          </Link>
-        </p>
-      </AuthLayout>
-   
+      </div>
+      <div className="mt-7">
+        <Input
+          label="Password"
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          name="password"
+        />
+      </div>
+      <Button
+        text="Login"
+        onClick={handleSubmit}
+        className="text-white w-full mt-6 bg-pink-600 p-3 rounded"
+      />
+      <p className="mt-12 text-sm font-light">
+        Don't have an account?
+        <Link to="/signup">
+          <span
+            role="button"
+            className="cursor-pointer text-pink-600"
+          >
+            {" "}
+            Sign Up.
+          </span>
+        </Link>
+      </p>
+    </AuthLayout>
   );
 };
 

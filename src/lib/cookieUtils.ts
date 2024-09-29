@@ -1,12 +1,18 @@
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 // Function to set a cookie
-export const setCookie = (name: string, value: string, days: number = 7) => {
+export const setCookie = (
+  name: string,
+  value: string,
+  days: number = 7
+) => {
   Cookies.set(name, value, { expires: days });
 };
 
 // Function to get a cookie by name
-export const getCookie = (name: string): string | undefined => {
+export const getCookie = (
+  name: string
+): string | undefined => {
   return Cookies.get(name);
 };
 

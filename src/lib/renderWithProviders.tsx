@@ -10,7 +10,9 @@ const renderWithProviders = (
 ) => {
   return render(
     <Provider store={store}>
-      <MemoryRouter initialEntries={initialEntries}>{ui}</MemoryRouter>
+      <MemoryRouter initialEntries={initialEntries}>
+        {ui}
+      </MemoryRouter>
     </Provider>
   );
 };
