@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { register } from "../services/http";
 import Input from "../components/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import { signup } from "../stores/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const SignUpPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
+  const dispatch=useDispatch();
   const handleSubmit = async () => {
     try {
-      await register(email, password);
-      // Redirect to login or dashboard after registration
+      const response=await register(email, password);
+      dispatch(signup(response.data))
+      navigate("/dashboard");
     } catch (error) {
       console.error("Registration failed", error);
     }

@@ -14,7 +14,7 @@ const DashboardPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1>Secure Dashboard</h1>
       <ul>
         {users.map((user: any) => (
           <li key={user.id}>{user.first_name} {user.last_name}</li>
